@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Julian's Playground</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    display:flex;
+    height:100vh;
+}
+
+.editor{
+    width:50%;
+    display:flex;
+    flex-direction:column;
+}
+
+textarea{
+    flex:1;
+    padding:10px;
+    font-family:monospace;
+    font-size:14px;
+    border:none;
+    border-bottom:1px solid #ccc;
+}
+
+iframe{
+    width:50%;
+    border:none;
+}
+
+.header{
+    background:#333;
+    color:white;
+    padding:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="editor">
+
+<div class="header">HTML</div>
+<textarea id="html">
+<h1>Hello Juju</h1>
+<p>Edit the HTML here.</p>
+</textarea>
+
+<div class="header">CSS</div>
+<textarea id="css">
+h1 {
+ color: steelblue;
+}
+</textarea>
+
+<div class="header">JavaScript</div>
+<textarea id="js">
+console.log("Hello from JS");
+</textarea>
+
+</div>
+
+<iframe id="preview"></iframe>
+
+<script>
+
+function updatePreview(){
+
+let html = document.getElementById("html").value
+let css = document.getElementById("css").value
+let js = document.getElementById("js").value
+
+let code = `
+<html>
+<head>
+<style>${css}</style>
+</head>
+<body>
+
+${html}
+
+<script>
+${js}
+<\/script>
+
+</body>
+</html>
+`
+
+let iframe = document.getElementById("preview")
+
+iframe.srcdoc = code
+
+}
+
+document.querySelectorAll("textarea").forEach(t => {
+t.addEventListener("input", updatePreview)
+})
+
+updatePreview()
+
+</script>
+
+</body>
+</html>
